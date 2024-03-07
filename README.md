@@ -8,6 +8,7 @@ This repository contains python scripts for histopathology image classification 
 * Image Format: **.jpg**
 
 # Dataset Citation
+Paper: [Hard Sample Aware Noise Robust Learning for Histopathology Image Classification](https://ieeexplore.ieee.org/document/9600806)
 ```
 @article{zhuhard,
   title={Hard Sample Aware Noise Robust Learning for Histopathology Image Classification},
