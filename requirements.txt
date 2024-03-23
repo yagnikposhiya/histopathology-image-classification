@@ -1,0 +1,9 @@
+numpy
+torch
+wandb
+pillow
+pandas
+torchvision
+scikit-learn
+opencv-python
+lightning
