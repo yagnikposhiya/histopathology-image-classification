@@ -23,7 +23,7 @@ from torch.utils.data import TensorDataset, DataLoader, random_split
 if __name__=='__main__':
 
     check_gpu_config() # check available compute modules (gpus) configuration
-    
+
     config = Config() # create an object of class Config
     model_resnet = Resnet18() # create an object of class Resnet18
 
@@ -48,8 +48,8 @@ if __name__=='__main__':
     train_dataframe = pd.DataFrame(train_data) # transform train json data into pandas dataframe
     test_dataframe = pd.DataFrame(test_data) # transform test json data into pandas dataframe
 
-    print('Data samples from train set: \n{}'.format(train_dataframe.head(10))) # first 10 train data samples
-    print('Data samples from test set: \n{}'.format(test_dataframe.head(10))) # first 10 test data samples``
+    print('- Data samples from train set: \n{}'.format(train_dataframe.head(10))) # first 10 train data samples
+    print('- Data samples from test set: \n{}'.format(test_dataframe.head(10))) # first 10 test data samples``
 
     X_train, Y_train = trainChaoyangDataLoading(train_dataframe, config.ROOT_PATH) # load whole training set with labels
 
@@ -76,6 +76,8 @@ if __name__=='__main__':
     trainer = pl.Trainer(max_epochs=config.MAX_EPOCHS, logger=wandb_logger) # initialize the pytorch lightning trainer
 
     model = CustomModule(model, criterion, optimizer, config.NUM_CLASSES) # create an object of CustomModule class & set the model configuration
+
+    print('Training started...')
 
     trainer.fit(model, train_loader, val_loader) # train the neural network
 

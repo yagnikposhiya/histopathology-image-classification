@@ -45,8 +45,8 @@ def trainChaoyangDataLoading(train_df:pd.core.frame.DataFrame, root_path:str) ->
     X_train = torch.stack(X_train) # convert image array list to tensor
     Y_train = torch.tensor(Y_train) # convert image label list to tensor
 
-    print('Shape of X_train: {}'.format(X_train.shape)) # X_train shape
-    print('Shape of Y_train: {}'.format(Y_train.shape)) # Y_train shape
+    print('- Shape of X_train: {}'.format(X_train.shape)) # X_train shape
+    print('- Shape of Y_train: {}'.format(Y_train.shape)) # Y_train shape
 
     return X_train, Y_train
 
