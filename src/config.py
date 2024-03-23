@@ -57,3 +57,6 @@ class Config():
         self.REINIT = True # set boolean value for re-initialization 
         self.ANONYMOUS = 'allow' # set anonymous value type
 
+        # Save models
+        self.MODEL_SAVE_ROOT_PATH = '/data/home/20CE114/workstation/lab/histopathology-image-classification/models'
+
