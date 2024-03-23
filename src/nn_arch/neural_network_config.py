@@ -39,10 +39,14 @@ class CustomModule(pl.LightningModule):
         self.log(config.LOG_NAME_TRAIN_ACC  , acc, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # log the accuracy for visualization
 
         # calculate and log additional metrics
-        precision, recall, f1 = self.calculate_metrics(outputs,labels)
+        precision, recall, f1, tp, fp, fn, tn = self.calculate_metrics(outputs,labels)
         self.log(config.LOG_NAME_TRAIN_PRECISION, precision, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
         self.log(config.LOG_NAME_TRAIN_RECALL, recall, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
         self.log(config.LOG_NAME_TRAIN_F1, f1, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_TRAIN_TP, tp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_TRAIN_FP, fp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_TRAIN_FN, fn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_TRAIN_TN, tn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
 
         return loss
     
@@ -59,10 +63,14 @@ class CustomModule(pl.LightningModule):
         self.log(config.LOG_NAME_VALID_ACC, acc, on_step=True, on_epoch=True, prog_bar=True) # log the accuracy for visualization
 
         # calculate and log additional metrics
-        precision, recall, f1 = self.calculate_metrics(outputs,labels)
+        precision, recall, f1, tp, fp, fn, tn = self.calculate_metrics(outputs,labels)
         self.log(config.LOG_NAME_VALID_PRECISION, precision, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
         self.log(config.LOG_NAME_VALID_RECALL, recall, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
         self.log(config.LOG_NAME_VALID_F1, f1, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_VALID_TP, tp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_VALID_FP, fp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_VALID_FN, fn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_VALID_TN, tn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
 
         return loss
 
@@ -99,4 +107,4 @@ class CustomModule(pl.LightningModule):
         avg_recall = recall.mean()
         avg_f1_score = f1_score.mean()
 
-        return avg_precision, avg_recall, avg_f1_score
+        return avg_precision, avg_recall, avg_f1_score, tp, fp, fn, tn
