@@ -29,9 +29,9 @@ class Config():
         # For model training
         self.LOG_NAME_TRAIN_LOSS = 'train_loss' # set log name for loss
         self.LOG_NAME_TRAIN_ACC = 'train_acc' # set log name for accuracy 
-        self.LOG_NAME_TRAIN_PRECISION = 'train_precision' # set log name for precision 
-        self.LOG_NAME_TRAIN_RECALL = 'train_recall' # set log name for recall
-        self.LOG_NAME_TRAIN_F1 = 'train_f1_score' # set log name for f1 score
+        self.LOG_NAME_TRAIN_PRECISION = 'train_mean_precision' # set log name for precision 
+        self.LOG_NAME_TRAIN_RECALL = 'train_mean_recall' # set log name for recall
+        self.LOG_NAME_TRAIN_F1 = 'train_mean_f1_score' # set log name for f1 score
         self.LOG_NAME_TRAIN_TP = 'train_tp' # set log name for true positives
         self.LOG_NAME_TRAIN_FP = 'train_fp' # set log name for false positives
         self.LOG_NAME_TRAIN_FN = 'train_fn' # set log name for false negatives
@@ -40,9 +40,9 @@ class Config():
         # For model validation
         self.LOG_NAME_VALID_LOSS = 'valid_loss' # set log name for loss
         self.LOG_NAME_VALID_ACC = 'valid_acc' # set log name for accuracy 
-        self.LOG_NAME_VALID_PRECISION = 'valid_precision' # set log name for precision 
-        self.LOG_NAME_VALID_RECALL = 'valid_recall' # set log name for recall
-        self.LOG_NAME_VALID_F1 = 'valid_f1_score' # set log name for f1 score
+        self.LOG_NAME_VALID_PRECISION = 'valid_mean_precision' # set log name for precision 
+        self.LOG_NAME_VALID_RECALL = 'valid_mean_recall' # set log name for recall
+        self.LOG_NAME_VALID_F1 = 'valid_mean_f1_score' # set log name for f1 score
         self.LOG_NAME_VALID_TP = 'valid_tp' # set log name for true positives
         self.LOG_NAME_VALID_FP = 'valid_fp' # set log name for false positives
         self.LOG_NAME_VALID_FN = 'valid_fn' # set log name for false negatives
