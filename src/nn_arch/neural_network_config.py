@@ -88,6 +88,7 @@ class CustomModule(pl.LightningModule):
         tp = confusion_matrix.diag()
         fp = confusion_matrix.sum(dim=0) - tp
         fn = confusion_matrix.sum(dim=1) - tp
+        tn = confusion_matrix.sum() - (tp + fp + fn)
 
         precision = tp / (tp + fp + 1e-6)
         recall = tp / (tp + fn + 1e-6)
