@@ -40,13 +40,13 @@ class CustomModule(pl.LightningModule):
 
         # calculate and log additional metrics
         precision, recall, f1, tp, fp, fn, tn = self.calculate_metrics(outputs,labels)
-        self.log(config.LOG_NAME_TRAIN_PRECISION, precision, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_TRAIN_RECALL, recall, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_TRAIN_F1, f1, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_TRAIN_TP, tp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_TRAIN_FP, fp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_TRAIN_FN, fn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_TRAIN_TN, tn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_TRAIN_PRECISION, precision, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # mean precisoin across all classes
+        self.log(config.LOG_NAME_TRAIN_RECALL, recall, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # mean recall across all classes
+        self.log(config.LOG_NAME_TRAIN_F1, f1, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # mean f1-score across classes
+        self.log(config.LOG_NAME_TRAIN_TP, tp.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # true positives across all classes
+        self.log(config.LOG_NAME_TRAIN_FP, fp.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # false positives across all classes
+        self.log(config.LOG_NAME_TRAIN_FN, fn.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # false negatives across all classes
+        self.log(config.LOG_NAME_TRAIN_TN, tn.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # true negatives across all classes
 
         return loss
     
@@ -64,13 +64,13 @@ class CustomModule(pl.LightningModule):
 
         # calculate and log additional metrics
         precision, recall, f1, tp, fp, fn, tn = self.calculate_metrics(outputs,labels)
-        self.log(config.LOG_NAME_VALID_PRECISION, precision, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_VALID_RECALL, recall, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_VALID_F1, f1, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_VALID_TP, tp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_VALID_FP, fp, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_VALID_FN, fn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
-        self.log(config.LOG_NAME_VALID_TN, tn, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True)
+        self.log(config.LOG_NAME_VALID_PRECISION, precision, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # mean precision across all classes
+        self.log(config.LOG_NAME_VALID_RECALL, recall, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # mean recall across all classes
+        self.log(config.LOG_NAME_VALID_F1, f1, on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # mean f1-score across all classes
+        self.log(config.LOG_NAME_VALID_TP, tp.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # true positives across all classes
+        self.log(config.LOG_NAME_VALID_FP, fp.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # false positives across all classes
+        self.log(config.LOG_NAME_VALID_FN, fn.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # false negatives across all classes
+        self.log(config.LOG_NAME_VALID_TN, tn.sum(), on_step=True, on_epoch=True, prog_bar=True, enable_graph=True) # true negatives across classes
 
         return loss
 
