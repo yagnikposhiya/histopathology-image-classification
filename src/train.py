@@ -4,6 +4,7 @@ github: @yagnikposhiya
 organization: Charotar University of Science and Technology
 """
 
+import os
 import torch
 import json
 import wandb
@@ -84,7 +85,7 @@ if __name__=='__main__':
     print('Training finished.')
 
     model_name = str(type(model).__name__) + str('_') + str(config.MAX_EPOCHS) + str('.pt') # set model name based on model type and max epochs
-    model_save_path = config.MODEL_SAVE_ROOT_PATH + model_name # set model save path
+    model_save_path = os.path.join(config.MODEL_SAVE_ROOT_PATH,model_name) # set model save path
     torch.save(model.state_dict(), model_save_path) # save model @ specified path
 
     print('Trained model saved as {}'.format(model_name)) # saved model successfully
