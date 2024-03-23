@@ -16,7 +16,7 @@ class Config():
 
         # Model training parameters
         self.NUM_CLASSES = 4 # set number of categories in dataset
-        self.BATCH_SIZE = 4 # set batch size 
+        self.BATCH_SIZE = 32 # set batch size 
         self.LEARNING_RATE = 0.001 # set learning rate
         self.SPLIT_RATIO = 0.8 # set train-validation split ratio
         self.SHUFFLE = False # set boolean value for data shuffling
