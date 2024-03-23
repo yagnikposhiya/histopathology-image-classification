@@ -12,6 +12,7 @@ import torch.optim as optim
 import pytorch_lightning as pl
 
 from config import Config
+from gpu_config.check import check_gpu_config
 from nn_arch.neural_network import Resnet18
 from pytorch_lightning.loggers import WandbLogger
 from chaoyang_data import trainChaoyangDataLoading
@@ -21,6 +22,8 @@ from torch.utils.data import TensorDataset, DataLoader, random_split
 
 if __name__=='__main__':
 
+    check_gpu_config() # check available compute modules (gpus) configuration
+    
     config = Config() # create an object of class Config
     model_resnet = Resnet18() # create an object of class Resnet18
 
