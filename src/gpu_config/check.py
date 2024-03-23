@@ -25,7 +25,7 @@ def check_gpu_config():
 
         for i in range(num_gpus):
             gpu_name = torch.cuda.get_device_name(i) # get gpu name
-            print('GPU name: {}'.format(gpu_name))
+            print('- GPU name: {}'.format(gpu_name))
 
         command = 'nvidia-smi' # set a command
         result = subprocess.run(command, shell=True, capture_output=True, text=True) # execute command
