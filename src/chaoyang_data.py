@@ -15,6 +15,11 @@ from torchvision import transforms
 def trainChaoyangDataLoading(train_df:pd.core.frame.DataFrame, root_path:str) -> torch.Tensor:
     '''
     This function is used to load chaoyang training data only.
+    Dataset information:
+    * Total classes/categories: 4
+    * Labels: [0, 1, 2, 3]
+    * Class/category names: [normal, serrated, adenocarinoma, adenoma]
+    * Images per class/category: [1111, 842, 1404, 664]
 
     Parameters:
     - train_df (pd.core.frame.DataFrame): dataframe contains training data samples
