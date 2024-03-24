@@ -4,15 +4,19 @@ github: @yagnikposhiya
 organization: Charotar University of Science and Technology
 """
 
+import os
 import torch.nn as nn
 
 class Config():
     def __init__(self) -> None:
 
+        # Current working directory
+        self.CWD = os.getcwd() # get current working directory
+
         # Data loading parameters
-        self.ROOT_PATH = '/data/home/20CE114/workstation/lab/histopathology-image-classification/data/raw/chaoyang-data/' # set root path for dataset
-        self.JSON_FILEPATH_TRAIN = '/data/home/20CE114/workstation/lab/histopathology-image-classification/data/raw/chaoyang-data/train.json' # set json filepath for train directory
-        self.JSON_FILEPATH_TEST = '/data/home/20CE114/workstation/lab/histopathology-image-classification/data/raw/chaoyang-data/test.json' # set json filepath for test directory
+        self.ROOT_PATH = os.path.join(self.CWD, 'data/raw/chaoyang-data/') # set root path for dataset
+        self.JSON_FILEPATH_TRAIN = os.path.join(self.CWD, 'data/raw/chaoyang-data/train.json') # set json filepath for train directory
+        self.JSON_FILEPATH_TEST = os.path.join(self.CWD, 'data/raw/chaoyang-data/test.json') # set json filepath for test directory
 
         # Model training parameters
         self.NUM_CLASSES = 4 # set number of categories in dataset
@@ -58,5 +62,5 @@ class Config():
         self.ANONYMOUS = 'allow' # set anonymous value type
 
         # Save models
-        self.MODEL_SAVE_ROOT_PATH = '/data/home/20CE114/workstation/lab/histopathology-image-classification/models'
+        self.MODEL_SAVE_ROOT_PATH = os.path.join(self.CWD, 'models/') # set root path to save trained models
 
