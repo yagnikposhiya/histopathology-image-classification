@@ -18,7 +18,7 @@ from pytorch_lightning.loggers import WandbLogger
 from chaoyang_data import trainChaoyangDataLoading
 from nn_arch.neural_network_config import CustomModule
 from torch.utils.data import TensorDataset, DataLoader, random_split
-from utils.utils import num_unique_labels, samples_per_category, model_selection, is_directory_existed
+from utils.utils import num_unique_labels, samples_per_category, model_selection, is_directory_existed, model_save_path
 
 
 if __name__=='__main__':
@@ -89,9 +89,9 @@ if __name__=='__main__':
     print('Training finished.')
 
     is_directory_existed(config.MODEL_SAVE_ROOT_PATH) # call function and check target directory exists or not
-    model_name = nn_arch_name + str('_') + str(config.MAX_EPOCHS) + str('.pt') # set model name based on model type and max epochs
-    model_save_path = os.path.join(config.MODEL_SAVE_ROOT_PATH,model_name) # set model save path
-    torch.save(model.state_dict(), model_save_path) # save model @ specified path
+    current_metrics = trainer.callback_metrics # extract callback metrics i.e. for validation loss and validation accuracy
+    model_name, path = model_save_path(config.MODEL_SAVE_ROOT_PATH, nn_arch_name, config.MAX_EPOCHS, current_metrics['valid_loss'].item(), current_metrics['valid_acc'].item()) # set model name & get model save path
+    torch.save(model.state_dict(), path) # save model @ specified path
 
     print('- Trained model saved as {}'.format(model_name)) # saved model successfully
 

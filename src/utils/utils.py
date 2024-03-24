@@ -116,3 +116,24 @@ def model_selection():
     print('- {} architecture is selected.'.format(selected_nn_arch))
 
     return user_choice, selected_nn_arch, nn_arch
+
+def model_save_path(root_path:str, nn_arch_name:str, epoch:int, val_acc:float, val_loss:float) -> str:
+    '''
+    This function is used to create model name and joint it with root path to create path for saving a trained model.
+
+    Parameters:
+    - root_path (str: root path for directory in which model will be saved
+    - nn_arch_name (str): name of neural network architecture selected by user
+    - epoch (int): number of epochs on which nn arch is trained
+    - val_acc (float): validation accuracy for last step of last epoch
+    - val_loss (float): validation loss for last step of last epoch
+
+    Returns:
+    - (str): model name only
+    - (str): path including model name @ which model will be saved
+    '''
+
+    model_name = str(nn_arch_name) + str('_') + str(epoch) + str('_') + str(val_acc) + str('_') + str(val_loss) + str('.pt') # generate model name
+    path = os.path.join(root_path, model_name) # generate whole path including model name
+
+    return model_name, path
