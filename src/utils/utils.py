@@ -14,7 +14,7 @@ def num_unique_labels(df:pd.core.frame.DataFrame) -> None:
     Parameters:
     - df (pd.core.frame.DataFrame): dataframe contains data samples
 
-    Retunrs:
+    Returns:
     - (None)
     '''
 
@@ -32,3 +32,68 @@ def samples_per_category(df:pd.core.frame.DataFrame) -> None:
     '''
 
     print('-- The number of data samples per class/category/label: \n{}'.format(df['label'].value_counts())) # the number of data samples per class/category
+
+def is_directory_existed(directory_path:str) -> None:
+    '''
+    This function is used to check target directory exist or not in the provided path.
+    If target directory does not exist in the path then create it.
+
+    Parameters:
+    - directory_path (str): path for target directory
+
+    Returns:
+    - (None)
+    '''
+
+    if not os.path.exists(directory_path): # check if target directory exists
+        os.makedirs(directory_path) # create target directory @ specified path
+        print('- Directory is successfully created at: {}'.format(directory_path))
+
+def get_choice(min_choice:int, max_choice:int) -> int:
+    '''
+    This function is used to take user's choice as an input for further processing.
+
+    Parameters:
+    - min_choice (int): min. integer value user can provide
+    - max_choice (int): max. integer value user can provide
+
+    Returns:
+    - (int): user's input/choice
+    '''
+
+    while (True):
+        try:
+            choice = int(input('* Enter your choice: '))
+            if min_choice<= choice <= max_choice: # check if choice lies between a range
+                return choice
+            else:
+                print('Invalid choice. Please enter a number between {min_choice} and {max_choice}.'.format(min_choice=min_choice, max_choice=max_choice))
+            
+        except:
+            print("Invalid input. Please enter a valid integer.")
+
+    
+
+def model_selection():
+    '''
+    This function provides facility to user to select neural network architecture for training.
+
+    Parameters:
+    - (None)
+
+    Returns:
+    - (int): user's choice
+    '''
+
+    # create a dictionary for user choices
+    choices = {
+        'Choice no.':[0, 1, 2, 3, 4],
+        'nn_arch':['ResNet-18', 'ResNet-34', 'ResNet-50', 'ResNet-101', 'ResNet-152']
+    }
+
+    dataframe = pd.DataFrame(choices) # convert choices dict into dataframe
+    print(dataframe) # show choices to user
+
+    user_choice = get_choice(0, len(dataframe)-1) # get user's choice
+    
+    return user_choice
