@@ -97,7 +97,7 @@ def model_selection():
     }
 
     dataframe = pd.DataFrame(choices) # convert choices dict into dataframe
-    print(dataframe) # show choices to user
+    print(dataframe.to_string(index=False)) # show choices to user without indices store by dataframe
 
     user_choice = get_choice(0, len(dataframe)-1) # get user's choice
     selected_nn_arch = dataframe.loc[dataframe['choice_no'] == user_choice, 'nn_arch'].values[0]

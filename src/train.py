@@ -93,6 +93,6 @@ if __name__=='__main__':
     model_save_path = os.path.join(config.MODEL_SAVE_ROOT_PATH,model_name) # set model save path
     torch.save(model.state_dict(), model_save_path) # save model @ specified path
 
-    print('Trained model saved as {}'.format(model_name)) # saved model successfully
+    print('- Trained model saved as {}'.format(model_name)) # saved model successfully
 
     wandb.finish() # close the weights & biases cloud instance
