@@ -49,6 +49,8 @@ def is_directory_existed(directory_path:str) -> None:
     if not os.path.exists(directory_path): # check if target directory exists
         os.makedirs(directory_path) # create target directory @ specified path
         print('- Directory is successfully created at: {}'.format(directory_path))
+    else:
+        print('- Directory already exists at: {}'.format(directory_path))
 
 def get_choice(min_choice:int, max_choice:int) -> int:
     '''
