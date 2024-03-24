@@ -18,6 +18,7 @@ from nn_arch.neural_network import Resnet18
 from pytorch_lightning.loggers import WandbLogger
 from chaoyang_data import trainChaoyangDataLoading
 from nn_arch.neural_network_config import CustomModule
+from utils.utils import num_unique_labels, samples_per_category
 from torch.utils.data import TensorDataset, DataLoader, random_split
 
 
@@ -51,6 +52,9 @@ if __name__=='__main__':
 
     print('- Data samples from train set: \n{}'.format(train_dataframe.head(10))) # first 10 train data samples
     print('- Data samples from test set: \n{}'.format(test_dataframe.head(10))) # first 10 test data samples``
+    print('- Categories & Samples per category for training set:')
+    num_unique_labels(train_dataframe) # the number of unique labels
+    samples_per_category(train_dataframe) # the number of data samples per class/category
 
     X_train, Y_train = trainChaoyangDataLoading(train_dataframe, config.ROOT_PATH) # load whole training set with labels
 
