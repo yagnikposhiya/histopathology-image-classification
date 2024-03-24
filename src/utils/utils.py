@@ -6,6 +6,7 @@ organization: Charotar University of Science and Technology
 
 import os
 import pandas as pd
+from nn_arch.neural_network import Resnet18, Resnet34, Resnet50, Resnet101, Resnet152
 
 def num_unique_labels(df:pd.core.frame.DataFrame) -> None:
     '''
@@ -83,11 +84,13 @@ def model_selection():
 
     Returns:
     - (int): user's choice
+    - (str): name of neural network architecture selected based on user's choice
+    - (unknown): neural network without pre-trained weights
     '''
 
     # create a dictionary for user choices
     choices = {
-        'Choice no.':[0, 1, 2, 3, 4],
+        'choice_no':[0, 1, 2, 3, 4],
         'nn_arch':['ResNet-18', 'ResNet-34', 'ResNet-50', 'ResNet-101', 'ResNet-152']
     }
 
@@ -95,5 +98,17 @@ def model_selection():
     print(dataframe) # show choices to user
 
     user_choice = get_choice(0, len(dataframe)-1) # get user's choice
-    
-    return user_choice
+    selected_nn_arch = dataframe.loc[dataframe['choice_no'] == user_choice, 'nn_arch'].values[0]
+
+    if selected_nn_arch == 'ResNet-18':
+        nn_arch = Resnet18()
+    elif selected_nn_arch == 'ResNet-34':
+        nn_arch = Resnet34()
+    elif selected_nn_arch == 'ResNet-50':
+        nn_arch = Resnet50()
+    elif selected_nn_arch == 'ResNet-101':
+        nn_arch = Resnet101()
+    elif selected_nn_arch == 'ResNet-152':
+        nn_arch = Resnet152()
+
+    return user_choice, selected_nn_arch, nn_arch
