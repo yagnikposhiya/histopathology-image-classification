@@ -25,6 +25,6 @@ class Resnet101():
     def __init__(self):
         self.MODEL = resnet101(pretrained=False, num_classes=config.NUM_CLASSES) # did not use pretrained model
 
-class Resnet151():
+class Resnet152():
     def __init__(self):
         self.MODEL = resnet152(pretrained=False, num_classes=config.NUM_CLASSES) # did not use pretrained model       
