@@ -31,4 +31,4 @@ def samples_per_category(df:pd.core.frame.DataFrame) -> None:
     - (None)
     '''
 
-    print('-- The number of data samples per class/category/label: {}'.format(df['label'].value_counts())) # the number of data samples per class/category
+    print('-- The number of data samples per class/category/label: \n{}'.format(df['label'].value_counts())) # the number of data samples per class/category
