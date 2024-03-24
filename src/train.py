@@ -14,12 +14,11 @@ import pytorch_lightning as pl
 
 from config import Config
 from gpu_config.check import check_gpu_config
-from nn_arch.neural_network import Resnet18
 from pytorch_lightning.loggers import WandbLogger
 from chaoyang_data import trainChaoyangDataLoading
 from nn_arch.neural_network_config import CustomModule
-from utils.utils import num_unique_labels, samples_per_category
 from torch.utils.data import TensorDataset, DataLoader, random_split
+from utils.utils import num_unique_labels, samples_per_category, model_selection, is_directory_existed
 
 
 if __name__=='__main__':
@@ -27,13 +26,14 @@ if __name__=='__main__':
     check_gpu_config() # check available compute modules (gpus) configuration
 
     config = Config() # create an object of class Config
-    model_resnet = Resnet18() # create an object of class Resnet18
+
+    user_choice, nn_arch_name, nn_arch = model_selection() # get user choice, nn architecture name, and neural network architecture
 
     # initialize the weights & biases cloud server instance
     wandb.init(entity=config.ENTITY,
                project=config.PROJECT,
                anonymous=config.ANONYMOUS,
-               group = config.GROUP[0],
+               group = config.GROUP[user_choice], # select group based on user choice
                reinit=config.REINIT)
 
     train_json_file = config.JSON_FILEPATH_TRAIN # set train json filepath
@@ -71,7 +71,7 @@ if __name__=='__main__':
 
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') # set computing device
-    model = model_resnet.MODEL # load resnet neural network
+    model = nn_arch.MODEL # load resnet neural network
     model = model.to(device) # move model arch to available computing device
     criterion = config.LOSS # set loss/criterion
     optimizer = optim.Adam(model.parameters(),lr=config.LEARNING_RATE) # set optimizer
@@ -88,7 +88,8 @@ if __name__=='__main__':
 
     print('Training finished.')
 
-    model_name = str(type(model).__name__) + str('_') + str(config.MAX_EPOCHS) + str('.pt') # set model name based on model type and max epochs
+    is_directory_existed(config.MODEL_SAVE_ROOT_PATH) # call function and check target directory exists or not
+    model_name = nn_arch_name + str('_') + str(config.MAX_EPOCHS) + str('.pt') # set model name based on model type and max epochs
     model_save_path = os.path.join(config.MODEL_SAVE_ROOT_PATH,model_name) # set model save path
     torch.save(model.state_dict(), model_save_path) # save model @ specified path
 

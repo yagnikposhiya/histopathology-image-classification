@@ -113,4 +113,6 @@ def model_selection():
     elif selected_nn_arch == 'ResNet-152':
         nn_arch = Resnet152()
 
+    print('- {} architecture is selected.'.format(selected_nn_arch))
+
     return user_choice, selected_nn_arch, nn_arch
