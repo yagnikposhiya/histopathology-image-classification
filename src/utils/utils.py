@@ -133,7 +133,7 @@ def model_save_path(root_path:str, nn_arch_name:str, epoch:int, val_acc:float, v
     - (str): path including model name @ which model will be saved
     '''
 
-    model_name = str(nn_arch_name) + str('_') + str(epoch) + str('_') + str(val_acc) + str('_') + str(val_loss) + str('.pt') # generate model name
+    model_name = f'{str(nn_arch_name)}_{str(epoch)}_{str(val_acc)}_{str(val_loss)}.pt' # generate model name
     path = os.path.join(root_path, model_name) # generate whole path including model name
 
     return model_name, path
