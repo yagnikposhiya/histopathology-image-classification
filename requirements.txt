@@ -3,7 +3,8 @@ torch
 wandb
 pillow
 pandas
+lightning
 torchvision
 scikit-learn
 opencv-python
-lightning
+torchsummary
