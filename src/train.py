@@ -12,13 +12,19 @@ import pandas as pd
 import torch.optim as optim
 import pytorch_lightning as pl
 
+from PIL import Image
 from config import Config
+from torchsummary import summary
+from torchvision import transforms
 from gpu_config.check import check_gpu_config
+from utils.featuremaps import FeatureExtractor
 from pytorch_lightning.loggers import WandbLogger
 from chaoyang_data import trainChaoyangDataLoading
 from nn_arch.neural_network_config import CustomModule
 from torch.utils.data import TensorDataset, DataLoader, random_split
 from utils.utils import num_unique_labels, samples_per_category, model_selection, is_directory_existed, model_save_path
+
+from torchvision.models import resnet18
 
 
 if __name__=='__main__':
@@ -90,9 +96,26 @@ if __name__=='__main__':
 
     is_directory_existed(config.MODEL_SAVE_ROOT_PATH) # call function and check target directory exists or not
     current_metrics = trainer.callback_metrics # extract callback metrics i.e. for validation loss and validation accuracy
-    model_name, path = model_save_path(config.MODEL_SAVE_ROOT_PATH, nn_arch_name, config.MAX_EPOCHS, current_metrics['valid_loss'].item(), current_metrics['valid_acc'].item()) # set model name & get model save path
-    torch.save(model.state_dict(), path) # save model @ specified path
+    model_name, path = model_save_path(config.MODEL_SAVE_ROOT_PATH, nn_arch_name, config.MAX_EPOCHS, current_metrics['valid_acc'].item(), current_metrics['valid_loss'].item()) # set model name & get model save path
+    torch.save(model, path) # save model @ specified path
 
     print('- Trained model saved as {}'.format(model_name)) # saved model successfully
+    print('- Model summary: \n')
+    external_model = resnet18(pretrained=False)
+    input_size = torch.Tensor(3,512,512) # set input size
+    input_tensors = [torch.randn(size).to('cuda') for size in input_size]
+    summary(external_model, input_size=input_tensors, device='cuda') # trained model summary
+
+    # generate feature maps of a test image
+    fmap_image_path = os.path.join(config.ROOT_PATH, test_dataframe.iloc[10]['name']) # create test image path
+    fmap_image = Image.open(fmap_image_path) # load an image
+    transform = transforms.Compose([
+        transforms.ToTensor() # convert image to tensor
+    ])
+    fmap_image = transform(fmap_image).unsqueeze(0) # add batch dimension
+    feature_extractor = FeatureExtractor(path, config.FEATURE_MAP_DIRECTORY, nn_arch, current_metrics['valid_acc'].item(), current_metrics['valid_loss'].item()) # create an instance of FeatureExtractor class
+    feature_extractor.extract_feature_maps(fmap_image) # extract feature maps of an image
+    feature_extractor.print_feature_maps() # save feature maps in the specified directory
+
 
     wandb.finish() # close the weights & biases cloud instance
