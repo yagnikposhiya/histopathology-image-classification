@@ -25,7 +25,7 @@ class Config():
         self.SPLIT_RATIO = 0.8 # set train-validation split ratio
         self.SHUFFLE = False # set boolean value for data shuffling
         self.LOSS = nn.CrossEntropyLoss() # set loss/criterion
-        self.MAX_EPOCHS = 60 # set total nuber of epochs
+        self.MAX_EPOCHS = 5 # set total nuber of epochs
 
         # Log visualization parameters
         self.LOG_MODEL = 'all' # set log model type for wandb
@@ -68,3 +68,5 @@ class Config():
         # Save models
         self.MODEL_SAVE_ROOT_PATH = os.path.join(self.CWD, 'models/') # set root path to save trained models
 
+        # Feature map directory
+        self.FEATURE_MAP_DIRECTORY = os.path.join(self.CWD, 'featuremaps/') # set root path to save feature maps
