@@ -55,13 +55,13 @@ class Config():
         # Weights & biases config
         self.ENTITY = 'neuralninjas' # set team/organization name for wandb account
         self.PROJECT = 'research-work' # set project name
-        self.GROUP = [ # set gropu name
+        self.GROUP = [
             'ResNet-18',
             'ResNet-34',
             'ResNet-50',
             'ResNet-101',
             'ResNet-152'
-            ]
+            ] # set group name
         self.REINIT = True # set boolean value for re-initialization 
         self.ANONYMOUS = 'allow' # set anonymous value type
 

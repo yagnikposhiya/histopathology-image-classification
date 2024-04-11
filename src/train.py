@@ -88,6 +88,9 @@ if __name__=='__main__':
 
     model = CustomModule(model, criterion, optimizer, config.NUM_CLASSES) # create an object of CustomModule class & set the model configuration
 
+    print('- Model summary: \n')
+    summary(model,(3,512,512)) # model summary; input shape is extracted @ data loading time...................
+
     print('Training started...')
 
     trainer.fit(model, train_loader, val_loader) # train the neural network
@@ -100,11 +103,6 @@ if __name__=='__main__':
     torch.save(model, path) # save model @ specified path
 
     print('- Trained model saved as {}'.format(model_name)) # saved model successfully
-    print('- Model summary: \n')
-    external_model = resnet18(pretrained=False)
-    input_size = torch.Tensor(3,512,512) # set input size
-    input_tensors = [torch.randn(size).to('cuda') for size in input_size]
-    summary(external_model, input_size=input_tensors, device='cuda') # trained model summary
 
     # generate feature maps of a test image
     fmap_image_path = os.path.join(config.ROOT_PATH, test_dataframe.iloc[10]['name']) # create test image path
