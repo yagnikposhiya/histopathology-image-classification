@@ -10,6 +10,7 @@ from torchvision.models import densenet121, densenet161, densenet169, densenet20
 from torchvision.models import mobilenet_v2, mobilenet_v3_small, mobilenet_v3_large
 from torchvision.models import efficientnet_b0, efficientnet_b1, efficientnet_b2, efficientnet_b3
 from torchvision.models import efficientnet_b4, efficientnet_b5, efficientnet_b6, efficientnet_b7
+# EfficientNet Paper: https://arxiv.org/abs/1905.11946
 
 config = Config() # create an object of class Config
 
