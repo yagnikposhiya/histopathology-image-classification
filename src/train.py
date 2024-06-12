@@ -14,7 +14,7 @@ import pytorch_lightning as pl
 
 from PIL import Image
 from config import Config
-from torchsummary import summary
+from torchinfo import summary
 from torchvision import transforms
 from gpu_config.check import check_gpu_config
 from utils.featuremaps import FeatureExtractor
@@ -56,6 +56,9 @@ if __name__=='__main__':
     train_dataframe = pd.DataFrame(train_data) # transform train json data into pandas dataframe
     test_dataframe = pd.DataFrame(test_data) # transform test json data into pandas dataframe
 
+    train_dataframe = train_dataframe.head(20) # extract some portion of train dataframe
+    test_dataframe = test_dataframe.head(20) # extract some portion of test dataframe
+
     print('- Data samples from train set: \n{}'.format(train_dataframe.head(10))) # first 10 train data samples
     print('- Data samples from test set: \n{}'.format(test_dataframe.head(10))) # first 10 test data samples``
     print('- Categories & Samples per category for training set:')
@@ -89,7 +92,7 @@ if __name__=='__main__':
     model = CustomModule(model, criterion, optimizer, config.NUM_CLASSES) # create an object of CustomModule class & set the model configuration
 
     print('- Model summary: \n')
-    summary(model,(3,512,512)) # model summary; input shape is extracted @ data loading time...................
+    summary(model,(1,3,512,512)) # model summary; input shape is extracted @ data loading time...................
 
     print('Training started...')
 
@@ -103,17 +106,6 @@ if __name__=='__main__':
     torch.save(model, path) # save model @ specified path
 
     print('- Trained model saved as {}'.format(model_name)) # saved model successfully
-
-    # generate feature maps of a test image
-    fmap_image_path = os.path.join(config.ROOT_PATH, test_dataframe.iloc[10]['name']) # create test image path
-    fmap_image = Image.open(fmap_image_path) # load an image
-    transform = transforms.Compose([
-        transforms.ToTensor() # convert image to tensor
-    ])
-    fmap_image = transform(fmap_image).unsqueeze(0) # add batch dimension
-    feature_extractor = FeatureExtractor(path, config.FEATURE_MAP_DIRECTORY, nn_arch, current_metrics['valid_acc'].item(), current_metrics['valid_loss'].item()) # create an instance of FeatureExtractor class
-    feature_extractor.extract_feature_maps(fmap_image) # extract feature maps of an image
-    feature_extractor.print_feature_maps() # save feature maps in the specified directory
 
 
     wandb.finish() # close the weights & biases cloud instance
