@@ -39,7 +39,6 @@ if __name__=='__main__':
     wandb.init(entity=config.ENTITY,
                project=config.PROJECT,
                anonymous=config.ANONYMOUS,
-               group = config.GROUP[user_choice], # select group based on user choice
                reinit=config.REINIT)
 
     train_json_file = config.JSON_FILEPATH_TRAIN # set train json filepath
