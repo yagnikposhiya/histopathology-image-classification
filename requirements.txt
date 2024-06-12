@@ -7,4 +7,4 @@ lightning
 torchvision
 scikit-learn
 opencv-python
-torchsummary
+torchinfo
