@@ -1,6 +1,6 @@
 """
-author: Dr. Sanskruti Patel, Yagnik Poshiya
-github: @yagnikposhiya
+author: Dr. Sanskruti Patel, Yagnik Poshiya, Rupesh Garsondiya
+github: @yagnikposhiya, @Rupeshgarsondiya
 organization: Charotar University of Science and Technology
 """
 
