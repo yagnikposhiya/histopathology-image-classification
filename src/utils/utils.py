@@ -7,6 +7,10 @@ organization: Charotar University of Science and Technology
 import os
 import pandas as pd
 from nn_arch.neural_network import Resnet18, Resnet34, Resnet50, Resnet101, Resnet152
+from nn_arch.neural_network import Densenet121, Densenet161, Densenet169, Densenet201
+from nn_arch.neural_network import Mobilenetv2, Mobilenetv3_small, Mobilenetv3_large
+from nn_arch.neural_network import Efficientnet_b0, Efficientnet_b1, Efficientnet_b2, Efficientnet_b3
+from nn_arch.neural_network import Efficientnet_b4, Efficientnet_b5, Efficientnet_b6, Efficientnet_b7
 
 def num_unique_labels(df:pd.core.frame.DataFrame) -> None:
     '''
@@ -92,8 +96,16 @@ def model_selection():
 
     # create a dictionary for user choices
     choices = {
-        'choice_no':[0, 1, 2, 3, 4],
-        'nn_arch':['ResNet-18', 'ResNet-34', 'ResNet-50', 'ResNet-101', 'ResNet-152']
+        'choice_no':[0, 1, 2, 3, 4, 
+                     5, 6, 7, 8,
+                     9, 10, 11,
+                     12, 13, 14, 15,
+                     16, 17, 18, 19],
+        'nn_arch':['ResNet-18', 'ResNet-34', 'ResNet-50', 'ResNet-101', 'ResNet-152',
+                   'DenseNet-121', 'DenseNet-161', 'DenseNet-169', 'DenseNet-201',
+                   'MobileNetV2', 'MobileNetV3-Small', 'MobileNetV3-Large',
+                   'Efficientnet-b0', 'Efficientnet-b1', 'Efficientnet-b2', 'Efficientnet-b3',
+                   'Efficientnet-b4', 'Efficientnet-b5', 'Efficientnet-b6', 'Efficientnet-b7']
     }
 
     dataframe = pd.DataFrame(choices) # convert choices dict into dataframe
@@ -112,6 +124,36 @@ def model_selection():
         nn_arch = Resnet101()
     elif selected_nn_arch == 'ResNet-152':
         nn_arch = Resnet152()
+    elif selected_nn_arch == 'DenseNet-121':
+        nn_arch = Densenet121()
+    elif selected_nn_arch == 'DenseNet-161':
+        nn_arch = Densenet161()
+    elif selected_nn_arch == 'DenseNet-169':
+        nn_arch = Densenet169()
+    elif selected_nn_arch == 'DenseNet-201':
+        nn_arch = Densenet201()
+    elif selected_nn_arch == 'MobileNetV2':
+        nn_arch = Mobilenetv2()
+    elif selected_nn_arch == 'MobileNetV3-Small':
+        nn_arch = Mobilenetv3_small()
+    elif selected_nn_arch == 'MobileNetV3-Large':
+        nn_arch = Mobilenetv3_large()
+    elif selected_nn_arch == 'Efficientnet-b0':
+        nn_arch = Efficientnet_b0()
+    elif selected_nn_arch == 'Efficientnet-b1':
+        nn_arch = Efficientnet_b1()
+    elif selected_nn_arch == 'Efficientnet-b2':
+        nn_arch = Efficientnet_b2()
+    elif selected_nn_arch == 'Efficientnet-b3':
+        nn_arch = Efficientnet_b3()
+    elif selected_nn_arch == 'Efficientnet-b4':
+        nn_arch = Efficientnet_b4()
+    elif selected_nn_arch == 'Efficientnet-b5':
+        nn_arch = Efficientnet_b5()
+    elif selected_nn_arch == 'Efficientnet-b6':
+        nn_arch = Efficientnet_b6()
+    elif selected_nn_arch == 'Efficientnet-b7':
+        nn_arch = Efficientnet_b7()
 
     print('- {} architecture is selected.'.format(selected_nn_arch))
 
