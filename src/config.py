@@ -25,7 +25,7 @@ class Config():
         self.SPLIT_RATIO = 0.8 # set train-validation split ratio
         self.SHUFFLE = False # set boolean value for data shuffling
         self.LOSS = nn.CrossEntropyLoss() # set loss/criterion
-        self.MAX_EPOCHS = 5 # set total nuber of epochs
+        self.MAX_EPOCHS = 2 # set total nuber of epochs
 
         # Log visualization parameters
         self.LOG_MODEL = 'all' # set log model type for wandb
@@ -55,13 +55,6 @@ class Config():
         # Weights & biases config
         self.ENTITY = 'neuralninjas' # set team/organization name for wandb account
         self.PROJECT = 'research-work' # set project name
-        self.GROUP = [
-            'ResNet-18',
-            'ResNet-34',
-            'ResNet-50',
-            'ResNet-101',
-            'ResNet-152'
-            ] # set group name
         self.REINIT = True # set boolean value for re-initialization 
         self.ANONYMOUS = 'allow' # set anonymous value type
 
