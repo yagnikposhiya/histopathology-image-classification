@@ -12,19 +12,14 @@ import pandas as pd
 import torch.optim as optim
 import pytorch_lightning as pl
 
-from PIL import Image
 from config import Config
 from torchinfo import summary
-from torchvision import transforms
 from gpu_config.check import check_gpu_config
-from utils.featuremaps import FeatureExtractor
 from pytorch_lightning.loggers import WandbLogger
 from chaoyang_data import trainChaoyangDataLoading
 from nn_arch.neural_network_config import CustomModule
 from torch.utils.data import TensorDataset, DataLoader, random_split
 from utils.utils import num_unique_labels, samples_per_category, model_selection, is_directory_existed, model_save_path
-
-from torchvision.models import resnet18
 
 
 if __name__=='__main__':
@@ -79,16 +74,19 @@ if __name__=='__main__':
 
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') # set computing device
-    model = nn_arch.MODEL # load resnet neural network
+
+    if 0 <= user_choice <= 19:
+        model = nn_arch.MODEL # load resnet neural network
+        criterion = config.LOSS # set loss/criterion
+        optimizer = optim.Adam(model.parameters(),lr=config.LEARNING_RATE) # set optimizer
+        model = CustomModule(model, criterion, optimizer, config.NUM_CLASSES) # create an object of CustomModule class & set the model configuration
+
+    elif user_choice == 20:
+        model = nn_arch
+
     model = model.to(device) # move model arch to available computing device
-    criterion = config.LOSS # set loss/criterion
-    optimizer = optim.Adam(model.parameters(),lr=config.LEARNING_RATE) # set optimizer
-
     wandb_logger = WandbLogger(log_model=config.LOG_MODEL) # set wandb logger
-
     trainer = pl.Trainer(max_epochs=config.MAX_EPOCHS, logger=wandb_logger) # initialize the pytorch lightning trainer
-
-    model = CustomModule(model, criterion, optimizer, config.NUM_CLASSES) # create an object of CustomModule class & set the model configuration
 
     print('- Model summary: \n')
     summary(model,(1,3,512,512)) # model summary; input shape is extracted @ data loading time...................
