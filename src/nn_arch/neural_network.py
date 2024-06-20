@@ -67,29 +67,29 @@ class Efficientnet_b0():
         self.MODEL = efficientnet_b0(pretrained=False,num_classes=config.NUM_CLASSES) # did not use pretrained model
     
 class Efficientnet_b1():
-    def __int__(self):
+    def __init__(self):
         self.MODEL = efficientnet_b1(pretrained=False, num_classes=config.NUM_CLASSES) # did not use prtrained model
 
 class Efficientnet_b2():
-    def __int__(self):
+    def __init__(self):
         self.MODEL = efficientnet_b2(pretrained=False, num_classes=config.NUM_CLASSES) # did not use prtrained model
 
 class Efficientnet_b3():
-    def __int__(self):
+    def __init__(self):
         self.MODEL = efficientnet_b3(pretrained=False, num_classes=config.NUM_CLASSES) # did not use prtrained model
 
 class Efficientnet_b4():
-    def __int__(self):
+    def __init__(self):
         self.MODEL = efficientnet_b4(pretrained=False, num_classes=config.NUM_CLASSES) # did not use prtrained model
 
 class Efficientnet_b5():
-    def __int__(self):
+    def __init__(self):
         self.MODEL = efficientnet_b5(pretrained=False, num_classes=config.NUM_CLASSES) # did not use prtrained model
 
 class Efficientnet_b6():
-    def __int__(self):
+    def __init__(self):
         self.MODEL = efficientnet_b6(pretrained=False, num_classes=config.NUM_CLASSES) # did not use prtrained model
 
 class Efficientnet_b7():
-    def __int__(self):
+    def __init__(self):
         self.MODEL = efficientnet_b7(pretrained=False, num_classes=config.NUM_CLASSES) # did not use prtrained model
