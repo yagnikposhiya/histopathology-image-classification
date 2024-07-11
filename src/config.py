@@ -54,7 +54,7 @@ class Config():
 
         # Weights & biases config
         self.ENTITY = 'neuralninjas' # set team/organization name for wandb account
-        self.PROJECT = 'research-work' # set project name
+        self.PROJECT = 'histopathology-image-classification' # set project name
         self.REINIT = True # set boolean value for re-initialization 
         self.ANONYMOUS = 'allow' # set anonymous value type
 
