@@ -6,11 +6,16 @@ organization: Charotar University of Science and Technology
 
 import os
 import pandas as pd
+
+from config import Config
+from nn_arch.ltc_cnn import CNN_LTC
 from nn_arch.neural_network import Resnet18, Resnet34, Resnet50, Resnet101, Resnet152
 from nn_arch.neural_network import Densenet121, Densenet161, Densenet169, Densenet201
 from nn_arch.neural_network import Mobilenetv2, Mobilenetv3_small, Mobilenetv3_large
 from nn_arch.neural_network import Efficientnet_b0, Efficientnet_b1, Efficientnet_b2, Efficientnet_b3
 from nn_arch.neural_network import Efficientnet_b4, Efficientnet_b5, Efficientnet_b6, Efficientnet_b7
+
+config = Config() # create config object of Config class
 
 def num_unique_labels(df:pd.core.frame.DataFrame) -> None:
     '''
@@ -100,12 +105,14 @@ def model_selection():
                      5, 6, 7, 8,
                      9, 10, 11,
                      12, 13, 14, 15,
-                     16, 17, 18, 19],
+                     16, 17, 18, 19,
+                     20],
         'nn_arch':['ResNet-18', 'ResNet-34', 'ResNet-50', 'ResNet-101', 'ResNet-152',
                    'DenseNet-121', 'DenseNet-161', 'DenseNet-169', 'DenseNet-201',
                    'MobileNetV2', 'MobileNetV3-Small', 'MobileNetV3-Large',
                    'Efficientnet-b0', 'Efficientnet-b1', 'Efficientnet-b2', 'Efficientnet-b3',
-                   'Efficientnet-b4', 'Efficientnet-b5', 'Efficientnet-b6', 'Efficientnet-b7']
+                   'Efficientnet-b4', 'Efficientnet-b5', 'Efficientnet-b6', 'Efficientnet-b7',
+                   'CNN-Liquid_Neural_Network']
     }
 
     dataframe = pd.DataFrame(choices) # convert choices dict into dataframe
@@ -154,6 +161,8 @@ def model_selection():
         nn_arch = Efficientnet_b6()
     elif selected_nn_arch == 'Efficientnet-b7':
         nn_arch = Efficientnet_b7()
+    elif selected_nn_arch == 'CNN-Liquid_Neural_Network':
+        nn_arch = CNN_LTC(config.NUM_CLASSES, config.LEARNING_RATE)
 
     print('- {} architecture is selected.'.format(selected_nn_arch))
 
