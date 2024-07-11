@@ -50,8 +50,8 @@ if __name__=='__main__':
     train_dataframe = pd.DataFrame(train_data) # transform train json data into pandas dataframe
     test_dataframe = pd.DataFrame(test_data) # transform test json data into pandas dataframe
 
-    train_dataframe = train_dataframe.head(20) # extract some portion of train dataframe
-    test_dataframe = test_dataframe.head(20) # extract some portion of test dataframe
+    # train_dataframe = train_dataframe.head(20) # extract some portion of train dataframe
+    # test_dataframe = test_dataframe.head(20) # extract some portion of test dataframe
 
     print('- Data samples from train set: \n{}'.format(train_dataframe.head(10))) # first 10 train data samples
     print('- Data samples from test set: \n{}'.format(test_dataframe.head(10))) # first 10 test data samples``
