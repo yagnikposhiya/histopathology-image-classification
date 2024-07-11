@@ -25,7 +25,7 @@ class Config():
         self.SPLIT_RATIO = 0.8 # set train-validation split ratio
         self.SHUFFLE = False # set boolean value for data shuffling
         self.LOSS = nn.CrossEntropyLoss() # set loss/criterion
-        self.MAX_EPOCHS = 2 # set total nuber of epochs
+        self.MAX_EPOCHS = 100 # set total nuber of epochs
 
         # Log visualization parameters
         self.LOG_MODEL = 'all' # set log model type for wandb
