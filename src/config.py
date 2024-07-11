@@ -59,7 +59,7 @@ class Config():
         self.ANONYMOUS = 'allow' # set anonymous value type
 
         # Save models
-        self.MODEL_SAVE_ROOT_PATH = os.path.join(self.CWD, 'models/') # set root path to save trained models
+        self.MODEL_SAVE_ROOT_PATH = os.path.join(self.CWD, 'saved_models/') # set root path to save trained models
 
         # Feature map directory
         self.FEATURE_MAP_DIRECTORY = os.path.join(self.CWD, 'featuremaps/') # set root path to save feature maps
